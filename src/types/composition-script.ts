@@ -74,4 +74,7 @@ export interface CompositionScript {
 export interface CodeCompositionProps extends CompositionScript {
   tokenizedLines: TokenizedLine[];
   durationInFrames: number;
+  // Remotion's CalculateMetadataFunction<T> requires T extends Record<string, unknown>.
+  // All concrete properties above satisfy this — the index signature opts us in.
+  [key: string]: unknown;
 }

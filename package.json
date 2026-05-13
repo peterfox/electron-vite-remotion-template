@@ -17,18 +17,22 @@
     "pree2e": "vite build --mode=test",
     "e2e": "playwright test",
     "bundle-remotion": "node electron/remotion/bundleRemotion.js",
-    "video": "remotion studio src/remotion/index.ts"
+    "video": "remotion studio src/remotion/index.ts",
+    "whisper:setup": "tsx scripts/whisper-setup.ts",
+    "whisper:transcribe": "tsx scripts/transcribe.ts",
+    "script:build": "tsx scripts/build-script.ts"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "@remotion/bundler": "4.0.182",
     "@remotion/cli": "^4.0.182",
+    "@remotion/install-whisper-cpp": "^4.0.182",
     "@remotion/player": "4.0.182",
     "@remotion/renderer": "4.0.182",
     "@remotion/zod-types": "^4.0.182",
     "electron-log": "^5.1.5",
     "electron-updater": "^6.1.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "remotion": "^4.0.182"
   },
   "devDependencies": {
@@ -43,6 +47,7 @@
     "postcss": "^8.4.35",
     "postcss-import": "^16.0.1",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.4.2",
     "vite": "^5.1.5",
     "vite-plugin-electron": "^0.28.4",
