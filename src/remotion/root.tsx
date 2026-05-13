@@ -1,25 +1,44 @@
 import "../App.css";
 
 import { Composition } from "remotion";
+import type { CodeCompositionProps } from "../types/composition-script";
+import calculateCodeMetadata from "./code-video/calculate-metadata";
+import { CodeComposition } from "./code-video/CodeComposition";
+import { sampleScript } from "./code-video/sample-script";
 import calculateRemotionMetadata from "./calculate-remotion-metadata";
 import { HelloWorld, myCompSchema } from "./video/HelloWorld";
 
 function RemotionRoot() {
+  // Default props for CodeComposition. calculateMetadata fills in
+  // tokenizedLines and resolves durationInFrames before first render.
+  const codeCompositionDefaults: CodeCompositionProps = {
+    ...sampleScript,
+    tokenizedLines: [], // populated by calculateMetadata
+    durationInFrames: 150, // overridden by calculateMetadata
+  };
+
   return (
     <>
       <Composition
-        // You can take the "id" to render a video:
-        // npx remotion render src/index.ts <id> out/video.mp4
-        id="HelloWorld"
-        component={HelloWorld}
-        schema={myCompSchema}
-        // Default props for the video:
+        id="CodeVideo"
+        component={CodeComposition}
+        defaultProps={codeCompositionDefaults}
+        calculateMetadata={calculateCodeMetadata}
+        // Fallback dimensions — overridden by calculateMetadata
         durationInFrames={150}
         fps={30}
         width={1920}
         height={1080}
-        // You can override these props for each render:
-        // https://www.remotion.dev/docs/parametrized-rendering
+      />
+
+      <Composition
+        id="HelloWorld"
+        component={HelloWorld}
+        schema={myCompSchema}
+        durationInFrames={150}
+        fps={30}
+        width={1920}
+        height={1080}
         defaultProps={{
           titleText: "Welcome to Remotion",
           titleColor: "#000000",
